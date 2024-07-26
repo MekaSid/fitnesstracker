@@ -1,0 +1,43 @@
+CREATE TABLE Exercises (
+    eID INT AUTO_INCREMENT PRIMARY KEY,
+    egroup VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Trainer (
+    tID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(250) NOT NULL,
+    egroup VARCHAR(100),
+    experience VARCHAR(50)
+);
+
+CREATE TABLE Workout (
+    wID INT AUTO_INCREMENT PRIMARY KEY,
+    uID INT NOT NULL,
+    tID INT,
+    date DATE NOT NULL,
+    e1ID INT,
+    e2ID INT,
+    e3ID INT,
+    egroup VARCHAR(50),
+    FOREIGN KEY (e1ID) REFERENCES Exercises (eID),
+    FOREIGN KEY (e2ID) REFERENCES Exercises (eID),
+    FOREIGN KEY (e3ID) REFERENCES Exercises (eID),
+    FOREIGN KEY (uID) REFERENCES User(uID),
+    FOREIGN KEY (tID) REFERENCES Trainer(tID)
+    
+
+);
+
+CREATE TABLE User (
+    uID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    gender VARCHAR(10),
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    weight FLOAT,
+    height FLOAT
+);
